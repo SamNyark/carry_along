@@ -1,10 +1,10 @@
+import 'package:carry_along/constants/colors.dart';
 import 'package:carry_along/constants/constants.dart';
 import 'package:carry_along/constants/dimensions.dart';
 import 'package:carry_along/pages/all.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 import 'folder.dart';
 
@@ -18,68 +18,82 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
   TabController? _controller;
+
+
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _controller = TabController(length: 2, vsync: this);
   }
 
+  GlobalKey<FormState> _formkey = GlobalKey<FormState>();
+
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Container(
-      decoration: BoxDecoration(
-        color: Color(0xff757572)
-          // gradient: LinearGradient(
-          //     begin: Alignment.topLeft,
-          //     end: Alignment.topRight,
-          //     colors: [
-          //   Color.fromARGB(115, 4, 4, 8),
-          //   Color.fromARGB(181, 27, 14, 39)
-          // ])),
-      ),
-      child: SafeArea(
-        child: Column(children: [
+    return SafeArea(
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        body: Column(children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
+            padding: EdgeInsets.symmetric(horizontal: Dimensions.width15),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: EdgeInsets.symmetric(
+                      horizontal: Dimensions.width10,
+                      vertical: Dimensions.height10),
                   child: Text(
                     "Notes",
-                    style: TextStyle(
-                        fontFamily: "karla",
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white),
+                    style: Constants.notes,
                   ),
                 ),
                 Container(
-                  width: 120,
+                  width: Dimensions.width10 * 12,
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
                           "Edit",
-                          style: TextStyle(
-                              fontFamily: "karla",
-                              fontSize: 18,
-                              color: Colors.white),
+                          style: Constants.edit,
                         ),
-                        SvgPicture.asset(
-                          "assets/icons/search.svg",
-                          height: 25,
-                          width: 25,
-                          color: Colors.white,
+                        GestureDetector(
+                          onTap: (() {}),
+                          child: SvgPicture.asset(
+                            "assets/icons/search.svg",
+                            height: Dimensions.height25,
+                            width: Dimensions.width25,
+                            color: Colors.white,
+                          ),
                         ),
-                        SvgPicture.asset(
-                          "assets/icons/menu.svg",
-                          height: 25,
-                          width: 25,
-                          color: Colors.white,
+                        GestureDetector(
+                          onTap: () {
+                            Get.defaultDialog(
+                                title: "Sign up",
+                                titleStyle: Constants.notes,
+                                backgroundColor: AppColor.bgColor,
+                                content: Container(
+                                  child: Form(key: _formkey, child: Column(
+                                    children: [
+                                      TextFormField(
+
+                                      ),
+                                      TextFormField(
+                                        
+                                      )
+                                    ],
+                                  )),
+                                  width: 300,
+                                  height: 300,
+                                ));
+                          },
+                          child: SvgPicture.asset(
+                            "assets/icons/menu.svg",
+                            height: Dimensions.height25,
+                            width: Dimensions.width25,
+                            color: Colors.white,
+                          ),
                         ),
                       ]),
                 )
@@ -113,6 +127,6 @@ class _HomePageState extends State<HomePage>
           )
         ]),
       ),
-    ));
+    );
   }
 }

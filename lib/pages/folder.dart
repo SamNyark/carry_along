@@ -1,3 +1,4 @@
+import 'package:carry_along/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/src/foundation/key.dart';
@@ -15,7 +16,6 @@ class _FolderState extends State<Folder> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xff757572),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
         child: MasonryGridView.builder(
@@ -27,14 +27,14 @@ class _FolderState extends State<Folder> {
             itemBuilder: (context, index) {
               return Container(
                 decoration: BoxDecoration(
-                    color: Color(0xff434545), borderRadius: BorderRadius.circular(20)),
+                    color: AppColor.containerColor, borderRadius: BorderRadius.circular(20)),
                 height: 200,
                 width: 120,
                 child: Column(
                   children: [
                     Center(
                         child: Image.asset(
-                      "assets/icons/folder.jpg",
+                      "assets/icons/folder.png",
                       height: 150,
                     )),
                     Text("data")
@@ -45,7 +45,6 @@ class _FolderState extends State<Folder> {
       ),
       floatingActionButton:
           FloatingActionButton(
-            backgroundColor: Color(0xff0287a8),
             child: Icon(Icons.add, size: 30,), onPressed: () {}),
     );
   }
