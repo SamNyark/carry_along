@@ -19,7 +19,6 @@ class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
   TabController? _controller;
 
-
   @override
   void initState() {
     super.initState();
@@ -27,7 +26,6 @@ class _HomePageState extends State<HomePage>
   }
 
   GlobalKey<FormState> _formkey = GlobalKey<FormState>();
-
 
   @override
   Widget build(BuildContext context) {
@@ -74,16 +72,55 @@ class _HomePageState extends State<HomePage>
                                 titleStyle: Constants.notes,
                                 backgroundColor: AppColor.bgColor,
                                 content: Container(
-                                  child: Form(key: _formkey, child: Column(
-                                    children: [
-                                      TextFormField(
-
-                                      ),
-                                      TextFormField(
-                                        
-                                      )
-                                    ],
-                                  )),
+                                  child: Form(
+                                      key: _formkey,
+                                      child: Column(
+                                        children: [
+                                          TextFormField(
+                                            cursorColor: AppColor.containerColor,
+                                            decoration: InputDecoration(
+                                              focusColor: Colors.white,
+                                              prefixIconColor: AppColor.containerColor,
+                                              enabledBorder:
+                                                  UnderlineInputBorder(
+                                                      borderSide:
+                                                          BorderSide(width: 2, color: AppColor.containerColor)),
+                                              hintText: "username",
+                                              prefixIcon: Icon(Icons.person),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: Dimensions.height10,
+                                          ),
+                                          TextFormField(
+                                            cursorColor: AppColor.containerColor,
+                                            decoration: InputDecoration(
+                                              prefixIconColor: AppColor.containerColor,
+                                              hintText: "Password",
+                                                enabledBorder:
+                                                    UnderlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                            width: 2, color: AppColor.containerColor)),
+                                                prefixIcon: Icon(
+                                                  Icons.lock,
+                                                )),
+                                          ),
+                                          SizedBox(height: Dimensions.height10,),
+                                          Container(
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius: BorderRadius.circular(Dimensions.height25)
+                                            ),
+                                            width: Dimensions.width25*10,
+                                            height: Dimensions.height10*4,
+                                            child: TextButton(
+                                              style: TextButton.styleFrom(
+                                                primary: AppColor.containerColor
+                                              ),
+                                              onPressed: (){}, child: Text("sign up", style: TextStyle(fontSize: 18),)),
+                                          )
+                                        ],
+                                      )),
                                   width: 300,
                                   height: 300,
                                 ));
