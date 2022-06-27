@@ -2,6 +2,7 @@ import 'package:carry_along/constants/colors.dart';
 import 'package:carry_along/constants/constants.dart';
 import 'package:carry_along/constants/dimensions.dart';
 import 'package:carry_along/pages/all.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -25,7 +26,10 @@ class _HomePageState extends State<HomePage>
     _controller = TabController(length: 2, vsync: this);
   }
 
-  GlobalKey<FormState> _formkey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
+
+  bool clicked = false;
+  String? _username, password;
 
   @override
   Widget build(BuildContext context) {
@@ -67,63 +71,284 @@ class _HomePageState extends State<HomePage>
                         ),
                         GestureDetector(
                           onTap: () {
-                            Get.defaultDialog(
-                                title: "Sign up",
-                                titleStyle: Constants.notes,
-                                backgroundColor: AppColor.bgColor,
-                                content: Container(
-                                  child: Form(
-                                      key: _formkey,
-                                      child: Column(
-                                        children: [
-                                          TextFormField(
-                                            cursorColor: AppColor.containerColor,
-                                            decoration: InputDecoration(
-                                              focusColor: Colors.white,
-                                              prefixIconColor: AppColor.containerColor,
-                                              enabledBorder:
-                                                  UnderlineInputBorder(
-                                                      borderSide:
-                                                          BorderSide(width: 2, color: AppColor.containerColor)),
-                                              hintText: "username",
-                                              prefixIcon: Icon(Icons.person),
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            height: Dimensions.height10,
-                                          ),
-                                          TextFormField(
-                                            cursorColor: AppColor.containerColor,
-                                            decoration: InputDecoration(
-                                              prefixIconColor: AppColor.containerColor,
-                                              hintText: "Password",
-                                                enabledBorder:
-                                                    UnderlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                            width: 2, color: AppColor.containerColor)),
-                                                prefixIcon: Icon(
-                                                  Icons.lock,
-                                                )),
-                                          ),
-                                          SizedBox(height: Dimensions.height10,),
-                                          Container(
-                                            decoration: BoxDecoration(
-                                              color: Colors.white,
-                                              borderRadius: BorderRadius.circular(Dimensions.height25)
-                                            ),
-                                            width: Dimensions.width25*10,
-                                            height: Dimensions.height10*4,
-                                            child: TextButton(
-                                              style: TextButton.styleFrom(
-                                                primary: AppColor.containerColor
+                            clicked
+                                ? Get.defaultDialog(
+                                    title: "Login",
+                                    titleStyle: Constants.notes,
+                                    backgroundColor: AppColor.bgColor,
+                                    content: Container(
+                                      width: Dimensions.width10 * 30,
+                                      height: Dimensions.height10 * 30,
+                                      child: Form(
+                                          key: _formkey,
+                                          child: Column(
+                                            children: [
+                                              TextFormField(
+                                                cursorColor: Colors.white,
+                                                decoration: InputDecoration(
+                                                  enabledBorder:
+                                                      UnderlineInputBorder(
+                                                          borderSide:
+                                                              BorderSide(
+                                                    width:
+                                                        Dimensions.height10 / 5,
+                                                  )),
+                                                  focusedBorder:
+                                                      UnderlineInputBorder(
+                                                          borderSide: BorderSide(
+                                                              width: Dimensions
+                                                                      .height10 /
+                                                                  5,
+                                                              color: Colors
+                                                                  .white)),
+                                                  labelText: "username",
+                                                  labelStyle: TextStyle(
+                                                      color: AppColor
+                                                          .containerColor),
+                                                  prefixIcon: Icon(
+                                                    Icons.person,
+                                                    color:
+                                                        AppColor.containerColor,
+                                                  ),
+                                                ),
+                                                validator: (input) {
+                                                  if (input == null ||
+                                                      input.isEmpty) {
+                                                    return "username cannot be empty";
+                                                  }
+                                                },
+                                                onSaved: (input) {},
                                               ),
-                                              onPressed: (){}, child: Text("sign up", style: TextStyle(fontSize: 18),)),
-                                          )
-                                        ],
-                                      )),
-                                  width: 300,
-                                  height: 300,
-                                ));
+                                              SizedBox(
+                                                height: Dimensions.height10,
+                                              ),
+                                              TextFormField(
+                                                cursorColor: Colors.white,
+                                                decoration: InputDecoration(
+                                                    labelText: "password",
+                                                    labelStyle: TextStyle(
+                                                        color: AppColor
+                                                            .containerColor),
+                                                    enabledBorder:
+                                                        UnderlineInputBorder(
+                                                            borderSide:
+                                                                BorderSide(
+                                                      width:
+                                                          Dimensions.height10 /
+                                                              5,
+                                                    )),
+                                                    focusedBorder: UnderlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                            width: Dimensions
+                                                                    .height10 /
+                                                                5,
+                                                            color:
+                                                                Colors.white)),
+                                                    prefixIcon: Icon(
+                                                      Icons.lock,
+                                                      color: AppColor
+                                                          .containerColor,
+                                                    )),
+                                              ),
+                                              SizedBox(
+                                                height: Dimensions.height10 * 2,
+                                              ),
+                                              Container(
+                                                decoration: BoxDecoration(
+                                                    color: Colors.white,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            Dimensions
+                                                                .height25)),
+                                                width: Dimensions.width25 * 10,
+                                                height: Dimensions.height10 * 4,
+                                                child: TextButton(
+                                                    style: TextButton.styleFrom(
+                                                        primary: AppColor
+                                                            .containerColor),
+                                                    onPressed: () {},
+                                                    child: Text(
+                                                      "login",
+                                                      style: TextStyle(
+                                                          fontSize: Dimensions
+                                                                  .height10 *
+                                                              2),
+                                                    )),
+                                              ),
+                                              SizedBox(
+                                                height: Dimensions.height10,
+                                              ),
+                                              Container(
+                                                  padding: EdgeInsets.only(
+                                                      left: Dimensions.width10 *
+                                                          3),
+                                                  child: RichText(
+                                                    text: TextSpan(
+                                                        text:
+                                                            "Don't have an account? ",
+                                                        children: [
+                                                          TextSpan(
+                                                              recognizer:
+                                                                  TapGestureRecognizer()
+                                                                    ..onTap =
+                                                                        () {
+                                                                      setState(
+                                                                          () {
+                                                                        clicked =
+                                                                            false;
+                                                                      });
+                                                                    },
+                                                              text: "Sign up",
+                                                              style: TextStyle(
+                                                                  decoration:
+                                                                      TextDecoration
+                                                                          .underline,
+                                                                  decorationColor:
+                                                                      Colors
+                                                                          .red,
+                                                                  fontSize: 16,
+                                                                  color: Colors
+                                                                      .red))
+                                                        ]),
+                                                  )),
+                                            ],
+                                          )),
+                                    ))
+                                : Get.defaultDialog(
+                                    title: "Sign up",
+                                    titleStyle: Constants.notes,
+                                    backgroundColor: AppColor.bgColor,
+                                    content: Container(
+                                      width: Dimensions.width10 * 30,
+                                      height: Dimensions.height10 * 30,
+                                      child: Form(
+                                          key: _formkey,
+                                          child: Column(
+                                            children: [
+                                              TextFormField(
+                                                cursorColor: Colors.white,
+                                                decoration: InputDecoration(
+                                                  enabledBorder:
+                                                      UnderlineInputBorder(
+                                                          borderSide:
+                                                              BorderSide(
+                                                    width:
+                                                        Dimensions.height10 / 5,
+                                                  )),
+                                                  focusedBorder:
+                                                      UnderlineInputBorder(
+                                                          borderSide: BorderSide(
+                                                              width: Dimensions
+                                                                      .height10 /
+                                                                  5,
+                                                              color: Colors
+                                                                  .white)),
+                                                  labelText: "username",
+                                                  labelStyle: TextStyle(
+                                                      color: AppColor
+                                                          .containerColor),
+                                                  prefixIcon: Icon(
+                                                    Icons.person,
+                                                    color:
+                                                        AppColor.containerColor,
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: Dimensions.height10,
+                                              ),
+                                              TextFormField(
+                                                cursorColor: Colors.white,
+                                                decoration: InputDecoration(
+                                                    labelText: "password",
+                                                    labelStyle: TextStyle(
+                                                        color: AppColor
+                                                            .containerColor),
+                                                    enabledBorder:
+                                                        UnderlineInputBorder(
+                                                            borderSide:
+                                                                BorderSide(
+                                                      width:
+                                                          Dimensions.height10 /
+                                                              5,
+                                                    )),
+                                                    focusedBorder: UnderlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                            width: Dimensions
+                                                                    .height10 /
+                                                                5,
+                                                            color:
+                                                                Colors.white)),
+                                                    prefixIcon: Icon(
+                                                      Icons.lock,
+                                                      color: AppColor
+                                                          .containerColor,
+                                                    )),
+                                              ),
+                                              SizedBox(
+                                                height: Dimensions.height10 * 2,
+                                              ),
+                                              Container(
+                                                decoration: BoxDecoration(
+                                                    color: Colors.white,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            Dimensions
+                                                                .height25)),
+                                                width: Dimensions.width25 * 10,
+                                                height: Dimensions.height10 * 4,
+                                                child: TextButton(
+                                                    style: TextButton.styleFrom(
+                                                        primary: AppColor
+                                                            .containerColor),
+                                                    onPressed: () {},
+                                                    child: Text(
+                                                      "sign up",
+                                                      style: TextStyle(
+                                                          fontSize: Dimensions
+                                                                  .height10 *
+                                                              2),
+                                                    )),
+                                              ),
+                                              SizedBox(
+                                                height: Dimensions.height10,
+                                              ),
+                                              Container(
+                                                  padding: EdgeInsets.only(
+                                                      left: Dimensions.width10 *
+                                                          3),
+                                                  child: RichText(
+                                                    text: TextSpan(
+                                                        text:
+                                                            "Already have an account? ",
+                                                        children: [
+                                                          TextSpan(
+                                                              recognizer:
+                                                                  TapGestureRecognizer()
+                                                                    ..onTap =
+                                                                        () {
+                                                                      setState(
+                                                                          () {
+                                                                        clicked =
+                                                                            true;
+                                                                      });
+                                                                    },
+                                                              text: "Login",
+                                                              style: TextStyle(
+                                                                  decoration:
+                                                                      TextDecoration
+                                                                          .underline,
+                                                                  decorationColor:
+                                                                      Colors
+                                                                          .red,
+                                                                  fontSize: 16,
+                                                                  color: Colors
+                                                                      .red))
+                                                        ]),
+                                                  )),
+                                            ],
+                                          )),
+                                    ));
                           },
                           child: SvgPicture.asset(
                             "assets/icons/menu.svg",
@@ -137,30 +362,30 @@ class _HomePageState extends State<HomePage>
               ],
             ),
           ),
-          Container(
-            child: TabBar(
-                controller: _controller,
-                indicatorColor: Color(0xffdec909),
-                padding: EdgeInsets.all(20),
-                labelColor: Color(0xffdec909),
-                labelPadding: EdgeInsets.all(10),
-                indicatorSize: TabBarIndicatorSize.label,
-                indicatorWeight: 2,
-                unselectedLabelColor: Colors.white,
-                tabs: [
-                  Text(
-                    "All",
-                    style: Constants.fs18,
-                  ),
-                  Text(
-                    "Folder",
-                    style: Constants.fs18,
-                  )
-                ]),
-          ),
+          TabBar(
+              controller: _controller,
+              indicatorColor: AppColor.indicatorColor,
+              padding: EdgeInsets.symmetric(
+                  horizontal: Dimensions.width10 * 2,
+                  vertical: Dimensions.height10 * 2),
+              labelColor: AppColor.indicatorColor,
+              labelPadding: EdgeInsets.all(Dimensions.height10),
+              indicatorSize: TabBarIndicatorSize.label,
+              indicatorWeight: Dimensions.height10 / 5,
+              unselectedLabelColor: Colors.white,
+              tabs: [
+                Text(
+                  "All",
+                  style: Constants.fs18,
+                ),
+                Text(
+                  "Folder",
+                  style: Constants.fs18,
+                )
+              ]),
           Expanded(
             child: TabBarView(
-                controller: _controller, children: [All(), Folder()]),
+                controller: _controller, children: const [All(), Folder()]),
           )
         ]),
       ),

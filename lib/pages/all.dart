@@ -2,8 +2,6 @@ import 'package:carry_along/constants/colors.dart';
 import 'package:carry_along/constants/dimensions.dart';
 import 'package:carry_along/pages/add_new.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 
@@ -26,25 +24,25 @@ class _AllState extends State<All> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Get.to(AddNew());
+          Get.to(const AddNew());
         },
-        child: Icon(Icons.file_present),
+        child: const Icon(Icons.file_present),
       ),
       body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+        padding: EdgeInsets.symmetric(horizontal: Dimensions.width15, vertical: Dimensions.height10/2),
         child: MasonryGridView.builder(
             crossAxisSpacing: 10,
             mainAxisSpacing: 10,
             itemCount: 10,
-            gridDelegate: SliverSimpleGridDelegateWithFixedCrossAxisCount(
+            gridDelegate: const SliverSimpleGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2),
             itemBuilder: (_, index) {
               return Container(
                 decoration: BoxDecoration(
                     color: AppColor.containerColor,
-                    borderRadius: BorderRadius.circular(20)),
-                height: 150,
-                width: 100,
+                    borderRadius: BorderRadius.circular(Dimensions.height10*2)),
+                height: Dimensions.height25*6,
+                width: Dimensions.width*10,
               );
             }),
       ),

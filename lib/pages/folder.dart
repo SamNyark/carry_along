@@ -1,8 +1,6 @@
 import 'package:carry_along/constants/colors.dart';
+import 'package:carry_along/constants/dimensions.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class Folder extends StatefulWidget {
@@ -17,9 +15,9 @@ class _FolderState extends State<Folder> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+        padding: EdgeInsets.symmetric(horizontal: Dimensions.width15, vertical: Dimensions.height10/2),
         child: MasonryGridView.builder(
-            gridDelegate: SliverSimpleGridDelegateWithFixedCrossAxisCount(
+            gridDelegate: const SliverSimpleGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2),
             itemCount: 20,
             crossAxisSpacing: 15,
@@ -37,7 +35,7 @@ class _FolderState extends State<Folder> {
                       "assets/icons/folder.png",
                       height: 150,
                     )),
-                    Text("data")
+                    const Text("data")
                   ],
                 ),
               );
@@ -45,7 +43,7 @@ class _FolderState extends State<Folder> {
       ),
       floatingActionButton:
           FloatingActionButton(
-            child: Icon(Icons.add, size: 30,), onPressed: () {}),
+            child: const Icon(Icons.add, size: 30,), onPressed: () {}),
     );
   }
 }
