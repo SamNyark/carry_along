@@ -2,7 +2,6 @@ import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class FormController extends GetxController {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -24,9 +23,9 @@ class FormController extends GetxController {
     super.dispose();
   }
 
-  Future<void> createUser(_username, _password,) async {
+  Future<void> createUser(username, password,) async {
     await _auth
-        .createUserWithEmailAndPassword(email: _username, password: _password)
+        .createUserWithEmailAndPassword(email: username, password: password)
         .then((value) async {
       FirebaseFirestore.instance
           .collection('users')
@@ -40,10 +39,12 @@ class FormController extends GetxController {
     });
   }
 
-  Future<void> login(_username, _password) async {
+  Future<void> login(username, password) async {
     await _auth
-        .signInWithEmailAndPassword(email: _username, password: _password)
-        .then((value) {})
+        .signInWithEmailAndPassword(email: username, password: password)
+        .then((value) {
+          
+        })
         .onError((error, stackTrace) {
       var str = error.toString().substring(error.toString().indexOf('T'));
       Get.snackbar("Error", str,
