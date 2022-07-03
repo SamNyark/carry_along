@@ -34,7 +34,8 @@ class FormController extends GetxController {
         'username': value.user!.email,
       });
     }).onError((error, stackTrace) {
-      Get.snackbar("Error", error.toString(),
+      var str = error.toString().substring(error.toString().indexOf('T'));
+      Get.snackbar("Error", str,
           colorText: Colors.white, backgroundColor: const Color(0xfffa3116));
     });
   }

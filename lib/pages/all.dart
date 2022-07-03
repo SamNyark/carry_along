@@ -1,9 +1,10 @@
-import 'package:carry_along/constants/colors.dart';
-import 'package:carry_along/constants/dimensions.dart';
 import 'package:carry_along/pages/add_new.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
+
+import '../helpers/colors.dart';
+import '../helpers/dimensions.dart';
 
 class All extends StatefulWidget {
   const All({Key? key}) : super(key: key);

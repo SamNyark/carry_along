@@ -1,10 +1,10 @@
-import 'package:carry_along/constants/colors.dart';
 import 'package:carry_along/pages/home_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'firebase_options.dart';
 import 'controllers/init_controller.dart' as binding;
+import 'helpers/colors.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -1,10 +1,10 @@
-import 'package:carry_along/constants/colors.dart';
-import 'package:carry_along/constants/constants.dart';
-import 'package:carry_along/constants/dimensions.dart';
 import 'package:carry_along/pages/all.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../constants/menu_list.dart';
+import '../helpers/colors.dart';
+import '../helpers/constants.dart';
+import '../helpers/dimensions.dart';
+import '../helpers/menu_list.dart';
 import 'folder.dart';
 
 class HomePage extends StatefulWidget {

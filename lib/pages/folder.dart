@@ -1,7 +1,8 @@
-import 'package:carry_along/constants/colors.dart';
-import 'package:carry_along/constants/dimensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+
+import '../helpers/colors.dart';
+import '../helpers/dimensions.dart';
 
 class Folder extends StatefulWidget {
   const Folder({Key? key}) : super(key: key);
