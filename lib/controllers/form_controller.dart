@@ -23,9 +23,9 @@ class FormController extends GetxController {
     super.dispose();
   }
 
-  Future<void> createUser(username, password,) async {
+  Future<void> createUser(email, password,) async {
     await _auth
-        .createUserWithEmailAndPassword(email: username, password: password)
+        .createUserWithEmailAndPassword(email: email, password: password)
         .then((value) async {
       FirebaseFirestore.instance
           .collection('users')

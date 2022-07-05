@@ -2,7 +2,6 @@ import 'package:carry_along/controllers/general_controller.dart';
 import 'package:flutter/gestures.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-
 import '../controllers/form_controller.dart';
 import 'colors.dart';
 import 'constants.dart';
@@ -65,6 +64,7 @@ class MenuList {
                     ),
                     TextFormField(
                       cursorColor: Colors.white,
+                      obscureText: true,
                       decoration: InputDecoration(
                           labelText: "password",
                           labelStyle: TextStyle(color: AppColor.containerColor),
@@ -183,6 +183,7 @@ class MenuList {
                     ),
                     TextFormField(
                       cursorColor: Colors.white,
+                      obscureText: true,
                       decoration: InputDecoration(
                           labelText: "password",
                           labelStyle: TextStyle(color: AppColor.containerColor),
