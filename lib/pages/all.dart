@@ -1,3 +1,4 @@
+import 'package:carry_along/controllers/form_controller.dart';
 import 'package:carry_along/pages/add_new.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -22,6 +23,8 @@ class _AllState extends State<All> {
     super.initState();
   }
 
+  final FormController formController = Get.find();
+
   @override
   Widget build(BuildContext context) {
     final firebaseUser = FirebaseAuth.instance.currentUser!.uid;
@@ -34,6 +37,9 @@ class _AllState extends State<All> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           //TODO must sign in first
+          if (formController.noUser()) {
+            Get.snackbar("Oops", "You must sign in first");
+          }
           Get.to(AddNew());
         },
         child: const Icon(Icons.file_present),
@@ -42,7 +48,7 @@ class _AllState extends State<All> {
           stream: items,
           builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (!snapshot.hasData) {
-              return CircularProgressIndicator.adaptive();
+              return Center(child: CircularProgressIndicator());
             }
             if (snapshot.data!.docs.length == 0) {
               return Container(
@@ -58,11 +64,14 @@ class _AllState extends State<All> {
               child: MasonryGridView.builder(
                   crossAxisSpacing: 10,
                   mainAxisSpacing: 10,
-                  itemCount: snapshot.data!.docs.length,
+                  itemCount: (formController.noUser())
+                      ? 0
+                      : snapshot.data!.docs.length,
                   gridDelegate:
                       const SliverSimpleGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2),
                   itemBuilder: (_, index) {
+                    dynamic noteContent = snapshot.data!.docs[index].data();
                     return Container(
                       decoration: BoxDecoration(
                           color: AppColor.containerColor,
@@ -70,6 +79,31 @@ class _AllState extends State<All> {
                               BorderRadius.circular(Dimensions.height10 * 2)),
                       height: Dimensions.height25 * 6,
                       width: Dimensions.width * 10,
+                      child: Column(
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: Dimensions.width10 / 2,
+                                  vertical: Dimensions.height10),
+                              child: Text(noteContent['title'],
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: Dimensions.height18)),
+                            ),
+                          ),
+                          SizedBox(
+                            height: Dimensions.height10 / 2,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: Dimensions.width10 / 2),
+                            child: Text(noteContent['content'],
+                                style: TextStyle(color: Colors.white)),
+                          )
+                        ],
+                      ),
                     );
                   }),
             );

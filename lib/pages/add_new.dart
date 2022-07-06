@@ -44,7 +44,7 @@ class AddNew extends StatelessWidget {
                               'content': content.text
                             }).then((value) {
                               Get.snackbar(
-                                  "Information", "Note Added to collection");
+                                  "Success", "Note Added to collection");
                               Get.to(HomePage());
                             });
                           }))

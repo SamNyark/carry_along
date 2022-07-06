@@ -1,6 +1,8 @@
+import 'package:carry_along/controllers/form_controller.dart';
 import 'package:carry_along/pages/all.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import '../helpers/colors.dart';
 import '../helpers/constants.dart';
 import '../helpers/dimensions.dart';
@@ -25,6 +27,7 @@ class _HomePageState extends State<HomePage>
   }
 
   MenuList action = MenuList();
+  final FormController formController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +59,9 @@ class _HomePageState extends State<HomePage>
                               style: Constants.edit,
                             ),
                             GestureDetector(
-                              onTap: (() {}),
+                              onTap: (() {
+                                formController.signOut();
+                              }),
                               child: SvgPicture.asset(
                                 "assets/icons/search.svg",
                                 height: Dimensions.height25,
@@ -69,12 +74,10 @@ class _HomePageState extends State<HomePage>
                               itemBuilder: (context) {
                                 return MenuList.menus.map((e) {
                                   return PopupMenuItem(
-                                    textStyle: TextStyle(
-                                      fontSize: 17,
-                                      color: Colors.black
-                                    ),
-                                    value: e,
-                                    child: Text(e));
+                                      textStyle: TextStyle(
+                                          fontSize: 17, color: Colors.black),
+                                      value: e,
+                                      child: Text(e));
                                 }).toList();
                               },
                               child: SvgPicture.asset(

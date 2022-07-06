@@ -1,3 +1,4 @@
+import 'package:carry_along/pages/home_page.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -6,13 +7,22 @@ import 'package:flutter/material.dart';
 class FormController extends GetxController {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   User? user;
+  String signupp = "sign up";
+  String loginn = "login";
+  String signOutt = "sign out";
+  List<String> menus = [];
+  Rx<bool> noUser = true.obs;
 
   @override
   void onInit() {
-    _auth.authStateChanges().listen((event) {
-      if (event == null) {
+    _auth.authStateChanges().listen((user) {
+      if (user == null) {
         //  TODO
-      } else {}
+        menus = [signupp, loginn];
+        noUser(true);
+      } else {
+        menus = [signOutt];
+      }
     });
 
     super.onInit();
@@ -23,7 +33,10 @@ class FormController extends GetxController {
     super.dispose();
   }
 
-  Future<void> createUser(email, password,) async {
+  Future<void> createUser(
+    email,
+    password,
+  ) async {
     await _auth
         .createUserWithEmailAndPassword(email: email, password: password)
         .then((value) async {
@@ -33,6 +46,8 @@ class FormController extends GetxController {
           .set({
         'username': value.user!.email,
       });
+      Get.to(HomePage());
+      noUser(false);
     }).onError((error, stackTrace) {
       var str = error.toString().substring(error.toString().indexOf('T'));
       Get.snackbar("Error", str,
@@ -44,9 +59,9 @@ class FormController extends GetxController {
     await _auth
         .signInWithEmailAndPassword(email: username, password: password)
         .then((value) {
-          
-        })
-        .onError((error, stackTrace) {
+      Get.to(HomePage());
+      noUser(false);
+    }).onError((error, stackTrace) {
       var str = error.toString().substring(error.toString().indexOf('T'));
       Get.snackbar("Error", str,
           colorText: Colors.white, backgroundColor: const Color(0xfffa3116));
@@ -55,5 +70,6 @@ class FormController extends GetxController {
 
   void signOut() async {
     await _auth.signOut();
+    noUser(true);
   }
 }
