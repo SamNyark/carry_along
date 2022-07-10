@@ -11,7 +11,7 @@ class FormController extends GetxController {
   String loginn = "login";
   String signOutt = "sign out";
   List<String> menus = [];
-  Rx<bool> noUser = true.obs;
+  bool noUser = true;
 
   @override
   void onInit() {
@@ -19,9 +19,10 @@ class FormController extends GetxController {
       if (user == null) {
         //  TODO
         menus = [signupp, loginn];
-        noUser(true);
+        noUser=true;
       } else {
         menus = [signOutt];
+        noUser =false;
       }
     });
 
@@ -47,7 +48,7 @@ class FormController extends GetxController {
         'username': value.user!.email,
       });
       Get.to(HomePage());
-      noUser(false);
+      noUser = false;
     }).onError((error, stackTrace) {
       var str = error.toString().substring(error.toString().indexOf('T'));
       Get.snackbar("Error", str,
@@ -60,7 +61,7 @@ class FormController extends GetxController {
         .signInWithEmailAndPassword(email: username, password: password)
         .then((value) {
       Get.to(HomePage());
-      noUser(false);
+      noUser=false;
     }).onError((error, stackTrace) {
       var str = error.toString().substring(error.toString().indexOf('T'));
       Get.snackbar("Error", str,
@@ -70,6 +71,6 @@ class FormController extends GetxController {
 
   void signOut() async {
     await _auth.signOut();
-    noUser(true);
+    noUser=true;
   }
 }

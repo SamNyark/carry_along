@@ -1,3 +1,4 @@
+import 'package:carry_along/helpers/routes.dart';
 import 'package:carry_along/pages/home_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +28,8 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: AppColor.bgColor,
           floatingActionButtonTheme: FloatingActionButtonThemeData(
               backgroundColor: AppColor.floatingColor)),
-      home: const HomePage(),
+      initialRoute: Routes.homePage,
+      getPages: Routes.routes,
     );
   }
 }

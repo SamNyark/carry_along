@@ -1,3 +1,4 @@
+import 'package:carry_along/helpers/routes.dart';
 import 'package:carry_along/pages/home_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -8,7 +9,7 @@ import '../helpers/colors.dart';
 import '../helpers/dimensions.dart';
 
 class AddNew extends StatelessWidget {
-  AddNew({Key? key}) : super(key: key);
+  AddNew({Key? key, required this.title, required this.content}) : super(key: key);
 
   TextEditingController title = TextEditingController();
   TextEditingController content = TextEditingController();
@@ -45,7 +46,7 @@ class AddNew extends StatelessWidget {
                             }).then((value) {
                               Get.snackbar(
                                   "Success", "Note Added to collection");
-                              Get.to(HomePage());
+                              Get.toNamed(Routes.homePage);
                             });
                           }))
                     ],
