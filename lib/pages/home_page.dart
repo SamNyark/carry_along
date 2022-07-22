@@ -1,4 +1,5 @@
 import 'package:carry_along/controllers/form_controller.dart';
+import 'package:carry_along/controllers/general_controller.dart';
 import 'package:carry_along/pages/all.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -28,6 +29,7 @@ class _HomePageState extends State<HomePage>
 
   MenuList action = MenuList();
   final FormController formController = Get.find();
+  final GeneralController generalController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -50,14 +52,10 @@ class _HomePageState extends State<HomePage>
                     ),
                   ),
                   Container(
-                      width: Dimensions.width10 * 12,
+                      width: Dimensions.width10 * 9,
                       child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
-                              "Edit",
-                              style: Constants.edit,
-                            ),
                             GestureDetector(
                               onTap: (() {
                                 formController.signOut();
@@ -66,7 +64,7 @@ class _HomePageState extends State<HomePage>
                                 "assets/icons/search.svg",
                                 height: Dimensions.height25,
                                 width: Dimensions.width25,
-                                color: Colors.white,
+                                color: AppColor.whiteColor,
                               ),
                             ),
                             PopupMenuButton(
@@ -75,7 +73,8 @@ class _HomePageState extends State<HomePage>
                                 return MenuList.menus.map((e) {
                                   return PopupMenuItem(
                                       textStyle: TextStyle(
-                                          fontSize: 17, color: Colors.black),
+                                          fontSize: Dimensions.height25/1.5,
+                                          color: AppColor.containerColor),
                                       value: e,
                                       child: Text(e));
                                 }).toList();
@@ -100,7 +99,7 @@ class _HomePageState extends State<HomePage>
               labelPadding: EdgeInsets.all(Dimensions.height10),
               indicatorSize: TabBarIndicatorSize.label,
               indicatorWeight: Dimensions.height10 / 5,
-              unselectedLabelColor: Colors.white,
+              unselectedLabelColor: AppColor.whiteColor,
               tabs: [
                 Text(
                   "All",
@@ -113,7 +112,7 @@ class _HomePageState extends State<HomePage>
               ]),
           Expanded(
             child: TabBarView(
-                controller: _controller, children: const [All(), Folder()]),
+                controller: _controller, children: [All(), Folder()]),
           )
         ]),
       ),

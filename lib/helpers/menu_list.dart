@@ -99,43 +99,53 @@ class MenuList {
                               BorderRadius.circular(Dimensions.height25)),
                       width: Dimensions.width25 * 10,
                       height: Dimensions.height10 * 4,
-                      child: TextButton(
-                          style: TextButton.styleFrom(
-                              primary: AppColor.containerColor),
-                          onPressed: () {
-                            if (_formkey.currentState!.validate()) {
-                              _formkey.currentState!.save();
-                              _formController.createUser(_username, _password);
-                            }
-                          },
-                          child: Text(
-                            "Sign up",
-                            style: TextStyle(fontSize: Dimensions.height10 * 2),
-                          )),
+                      child: Obx(
+                        () {
+                          return TextButton(
+                              style: TextButton.styleFrom(
+                                  primary: AppColor.containerColor),
+                              onPressed: () {
+                                if (_formkey.currentState!.validate()) {
+                                  _formkey.currentState!.save();
+                                  _formController.createUser(
+                                      _username, _password);
+                                }
+                              },
+                              child: _generalController.clicked.value
+                                  ? CircularProgressIndicator(
+                                      color: Colors.black,
+                                    )
+                                  : Text(
+                                      "Sign up",
+                                      style: TextStyle(
+                                          fontSize: Dimensions.height10 * 2),
+                                    ));
+                        },
+                      ),
                     ),
                     SizedBox(
                       height: Dimensions.height10,
                     ),
-                    Container(
-                        padding: EdgeInsets.only(left: Dimensions.width10 * 3),
-                        child: RichText(
-                          text: TextSpan(
-                              text: "Already have an account?",
-                              children: [
-                                TextSpan(
-                                    recognizer: TapGestureRecognizer()
-                                      ..onTap = () {
-                                        _generalController.clicked.value =
-                                            !(_generalController.clicked.value);
-                                      },
-                                    text: login,
-                                    style: const TextStyle(
-                                        decoration: TextDecoration.underline,
-                                        decorationColor: Colors.red,
-                                        fontSize: 16,
-                                        color: Colors.red))
-                              ]),
-                        )),
+                    // Container(
+                    //     padding: EdgeInsets.only(left: Dimensions.width10 * 3),
+                    //     child: RichText(
+                    //       text: TextSpan(
+                    //           text: "Already have an account?",
+                    //           children: [
+                    //             TextSpan(
+                    //                 recognizer: TapGestureRecognizer()
+                    //                   ..onTap = () {
+                    //                     _generalController.clicked.value =
+                    //                         !(_generalController.clicked.value);
+                    //                   },
+                    //                 text: login,
+                    //                 style: const TextStyle(
+                    //                     decoration: TextDecoration.underline,
+                    //                     decorationColor: Colors.red,
+                    //                     fontSize: 16,
+                    //                     color: Colors.red))
+                    //           ]),
+                    //     )),
                   ],
                 )),
           ));
@@ -211,54 +221,58 @@ class MenuList {
                     SizedBox(
                       height: Dimensions.height10 * 2,
                     ),
-                    Container(
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius:
-                              BorderRadius.circular(Dimensions.height25)),
-                      width: Dimensions.width25 * 10,
-                      height: Dimensions.height10 * 4,
-                      child: TextButton(
-                          style: TextButton.styleFrom(
-                              primary: AppColor.containerColor),
-                          onPressed: () {
-                            if (_formkey.currentState!.validate()) {
-                              _formkey.currentState!.save();
-                              _formController.login(_username, _password);
-                            }
-                          },
-                          child: Text(
-                            "login",
-                            style: TextStyle(fontSize: Dimensions.height10 * 2),
-                          )),
+                    Obx(
+                      () {
+                        return Container(
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius:
+                                  BorderRadius.circular(Dimensions.height25)),
+                          width: Dimensions.width25 * 10,
+                          height: Dimensions.height10 * 4,
+                          child: TextButton(
+                              style: TextButton.styleFrom(
+                                  primary: AppColor.containerColor),
+                              onPressed: () {
+                                if (_formkey.currentState!.validate()) {
+                                  _formkey.currentState!.save();
+                                  _formController.login(_username, _password);
+                                }
+                              },
+                              child: _generalController.clicked.value ? CircularProgressIndicator() : Text(
+                                "login",
+                                style: TextStyle(
+                                    fontSize: Dimensions.height10 * 2),
+                              )),
+                        );
+                      },
                     ),
                     SizedBox(
                       height: Dimensions.height10,
                     ),
-                    Container(
-                        padding: EdgeInsets.only(left: Dimensions.width10 * 3),
-                        child: RichText(
-                          text: TextSpan(
-                              text: "Don't have an account?",
-                              children: [
-                                TextSpan(
-                                    recognizer: TapGestureRecognizer()
-                                      ..onTap = () {
-                                        _generalController.clicked.value =
-                                            !(_generalController.clicked.value);
-                                      },
-                                    text: signup,
-                                    style: const TextStyle(
-                                        decoration: TextDecoration.underline,
-                                        decorationColor: Colors.red,
-                                        fontSize: 16,
-                                        color: Colors.red))
-                              ]),
-                        )),
+                    // Container(
+                    //     padding: EdgeInsets.only(left: Dimensions.width10 * 3),
+                    //     child: RichText(
+                    //       text: TextSpan(
+                    //           text: "Don't have an account?",
+                    //           children: [
+                    //             TextSpan(
+                    //                 recognizer: TapGestureRecognizer()
+                    //                   ..onTap = () {
+                    //                     _generalController.clicked.value =
+                    //                         !(_generalController.clicked.value);
+                    //                   },
+                    //                 text: signup,
+                    //                 style: const TextStyle(
+                    //                     decoration: TextDecoration.underline,
+                    //                     decorationColor: Colors.red,
+                    //                     fontSize: 16,
+                    //                     color: Colors.red))
+                    //           ]),
+                    //     )),
                   ],
                 )),
           ));
-      
     }
   }
 }

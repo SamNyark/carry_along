@@ -1,6 +1,5 @@
 import 'package:carry_along/pages/edit_page.dart';
 import 'package:carry_along/pages/home_page.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class Routes {

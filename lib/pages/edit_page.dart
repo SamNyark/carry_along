@@ -16,14 +16,14 @@ class EditPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final firebaseUser = FirebaseAuth.instance.currentUser!.uid;
-    final Stream<QuerySnapshot> _stream = FirebaseFirestore.instance
+    final Stream<QuerySnapshot> stream = FirebaseFirestore.instance
         .collection('users')
         .doc(firebaseUser)
         .collection('data')
         .snapshots();
     return SafeArea(
         child: StreamBuilder(
-            stream: _stream,
+            stream: stream,
             builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
               dynamic ref = snapshot.data!.docs[index].data();
               title.text = ref['title'].toString();
@@ -33,7 +33,7 @@ class EditPage extends StatelessWidget {
                 
               }
               return Scaffold(
-                  backgroundColor: Colors.white,
+                  backgroundColor: AppColor.whiteColor,
                   body: Container(
                     margin: EdgeInsets.symmetric(
                         horizontal: Dimensions.width10 * 2),

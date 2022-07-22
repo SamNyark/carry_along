@@ -1,15 +1,14 @@
+import 'package:carry_along/controllers/form_controller.dart';
 import 'package:carry_along/helpers/routes.dart';
-import 'package:carry_along/pages/home_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../helpers/colors.dart';
 import '../helpers/dimensions.dart';
 
 class AddNew extends StatelessWidget {
-  AddNew({Key? key, required this.title, required this.content}) : super(key: key);
+  AddNew({Key? key}) : super(key: key);
 
   TextEditingController title = TextEditingController();
   TextEditingController content = TextEditingController();
@@ -19,7 +18,7 @@ class AddNew extends StatelessWidget {
     final firebaseUser = FirebaseAuth.instance.currentUser!.uid;
     return SafeArea(
         child: Scaffold(
-            backgroundColor: Colors.white,
+            backgroundColor: AppColor.whiteColor,
             body: Container(
               margin: EdgeInsets.symmetric(horizontal: Dimensions.width10 * 2),
               child: Column(
